@@ -1,9 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage: React.FC = () => {
   const navigate = useNavigate(); 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const handleLoginApp = () => {
+    navigate('/todo');
+  }
+  const handleSignUpApp = () => {
+    navigate('/SignUp');
+  }
+  const handleEmailChange = (email:any) => {
+    setEmail(email);
+  }
+  const handlePasswordChange = (Password:any) => {
+    setPassword(Password);
+  }
   useEffect(() => {
     const container = document.querySelector('.content') as HTMLElement;
 
@@ -33,9 +48,6 @@ const LandingPage: React.FC = () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
-  const handleOpenApp = () => {
-    navigate('/todo');
-  }
   return (
     <>
       <div className="landingPage-container">
@@ -47,7 +59,24 @@ const LandingPage: React.FC = () => {
             <p className="quote">Your next big achievement starts with a single task</p>
             </div>
             <div className='btn-box'>
-                <button className='btn' onClick={handleOpenApp}>open app</button>
+              <input 
+                type="text" 
+                className="input-field-email" 
+                placeholder="please enter your Email" 
+                value={email} 
+                onChange={(e) => handleEmailChange(e.target.value)}
+              />
+              <input 
+                type="password" 
+                className="input-field-password" 
+                placeholder="please enter your Password" 
+                value={password} 
+                onChange={(e) => handlePasswordChange(e.target.value)}
+              />
+              <div className='login-signup-box'>
+              <button className='login-btn' onClick={handleLoginApp}>Login</button>
+              <button className='signUp-btn' onClick={handleSignUpApp}>SignUp</button>
+              </div>
             </div>
         </div>
       </div>
