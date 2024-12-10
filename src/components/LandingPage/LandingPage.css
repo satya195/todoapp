@@ -208,7 +208,7 @@
   outline: none;
 }
 
-.input-field-email, .input-field-password {
+.input-field-email, .input-field-password, .input-field-name , .input-field-confirmPassword {
   width: 100%;
   color: #fff6f6;
   padding: 10px;

@@ -6,12 +6,39 @@ const LandingPage: React.FC = () => {
   const navigate = useNavigate(); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [signUpActive, setSignUpActive] = useState(false);
+  const [signUpname, setSignUpName] = useState('');
+  const [signUpEmail, setSignUpEmail] = useState('');
+  const [signUpPassword, setSignUpPassword] = useState('');
+  const [signUPconfirmPassword, setSignUpConfirmPassword] = useState('');
+
+  const handleBacktoLoginApp = () => {
+    setSignUpActive(false);
+  }
+  const handleSignUp = () => {
+  console.log("write api here");
+  }
+  const handleSignUpNameChange = (signUpname:any) => {
+      setSignUpName(signUpname);
+  }
+  const handleSignUpEmailChange = (signUpEmail:any) => {
+      setSignUpEmail(signUpEmail);
+  }
+  const handleSignUpPasswordChange = (signUpPassword:any) => {
+      setSignUpPassword(signUpPassword);
+  }
+  const handleSignUpConfirmPasswordChange = (signUPconfirmPassword:any) => {
+      setSignUpConfirmPassword(signUPconfirmPassword);
+    }
+
   
   const handleLoginApp = () => {
+    console.log("write api here");
     navigate('/todo');
   }
   const handleSignUpApp = () => {
-    navigate('/SignUp');
+    setSignUpActive(true);
   }
   const handleEmailChange = (email:any) => {
     setEmail(email);
@@ -55,10 +82,46 @@ const LandingPage: React.FC = () => {
         <div className='content-box'>
             <div className="content">
             <h1 className="main-heading">Welcome to <span className='project-name'>TaskSphere</span></h1>
-            <p className="quote">Productivity is never an accident. It is always the result of commitment to excellence</p>
-            <p className="quote">Your next big achievement starts with a single task</p>
+            {signUpActive ? ( <>  <p className="quote">Sign up soon, as a world of productvity awaits you</p>
+            <p className="quote">Be the change!!</p></>) : ( <><p className="quote">Productivity is never an accident. It is always the result of commitment to excellence</p>
+              <p className="quote">Your next big achievement starts with a single task</p></>)}
+         
+     
             </div>
-            <div className='btn-box'>
+            {signUpActive ? (  <div className='btn-box'>
+          <input 
+              type="text" 
+              className="input-field-name" 
+              placeholder="please enter your name" 
+              value={signUpname} 
+              onChange={(e) => handleSignUpNameChange(e.target.value)}
+            />
+            <input 
+              type="text" 
+              className="input-field-email" 
+              placeholder="please enter your Email" 
+              value={signUpEmail} 
+              onChange={(e) => handleSignUpEmailChange(e.target.value)}
+            />
+            <input 
+              type="password" 
+              className="input-field-password" 
+              placeholder="please enter your Password" 
+              value={signUpPassword} 
+              onChange={(e) => handleSignUpPasswordChange(e.target.value)}
+            />
+            <input 
+              type="password" 
+              className="input-field-confirmPassword" 
+              placeholder="please confirm your Password" 
+              value={signUPconfirmPassword} 
+              onChange={(e) => handleSignUpConfirmPasswordChange(e.target.value)}
+            />
+            <div className='login-signup-box'>
+                <button className='signUp-btn' onClick={handleSignUp}>SignUp</button>
+                <button className='login-btn' onClick={handleBacktoLoginApp}>Back to SignIn</button>      
+            </div>
+          </div>) : (     <div className='btn-box'>
               <input 
                 type="text" 
                 className="input-field-email" 
@@ -74,10 +137,10 @@ const LandingPage: React.FC = () => {
                 onChange={(e) => handlePasswordChange(e.target.value)}
               />
               <div className='login-signup-box'>
-              <button className='login-btn' onClick={handleLoginApp}>Login</button>
+              <button className='login-btn' onClick={handleLoginApp}>SignIn</button>
               <button className='signUp-btn' onClick={handleSignUpApp}>SignUp</button>
               </div>
-            </div>
+            </div>)}
         </div>
       </div>
     </>
